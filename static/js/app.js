@@ -112,6 +112,8 @@ function optionChanged(newSample) {
   var newMetadata = metadata[newIndex];
   var newSampleData = samples[newIndex];
 
+  console.log("Hey!", newSampleData);
+
   // update the metadata panel
   let counter = 0;
   // remove previous metadata entries
@@ -124,6 +126,33 @@ function optionChanged(newSample) {
     mdEntry.attr('valNum', counter);
     counter +=1;
   }
+
+  // set new parameters for bubble chart
+  var trace1 = {
+    x: newSampleData.otu_ids,
+    y: newSampleData.sample_values,
+    text: newSampleData.otu_labels,
+    mode: 'markers',
+    marker: {
+      color: newSampleData.otu_ids,  
+      size: newSampleData.sample_values,
+      sizeref: 1.5,
+      sizemode: 'diameter'
+    }
+  };
+
+  var bubbleData = [trace1];
+  
+  // define layout for bubble chart
+  var bubbleLayout = { 
+    xaxis: {title: {text: 'OTU ID'}},
+    showlegend: false,
+    height: 500,
+    width: 1000
+  };
+  
+  // restyle bubble chart with new values
+  Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 }
 
   
