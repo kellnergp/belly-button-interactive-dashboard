@@ -113,6 +113,17 @@ function optionChanged(newSample) {
   var newSampleData = samples[newIndex];
 
   // update the metadata panel
+  let counter = 0;
+  // remove previous metadata entries
+  d3.selectAll("p").remove();
+  // select the metadata panel
+  var mdPanel = d3.select('div.panel-body');
+  // add new metadata entries in a loop 
+  for (let [key, value] of Object.entries(newMetadata)) {
+    mdEntry = mdPanel.append("p").text(`${key}: ${value}`);
+    mdEntry.attr('valNum', counter);
+    counter +=1;
+  }
 }
 
   
