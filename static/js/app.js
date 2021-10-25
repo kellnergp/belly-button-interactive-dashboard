@@ -15,6 +15,12 @@ d3.json(url).then(function(data) {
 
     // set initial values for all panes
     function init() {
+      // add options to dropdown
+      var select = d3.select("select");
+      for (var i = 0; i < names.length; ++i) {
+          newOption = select.append("option").text(names[i]);
+          newOption.attr('value', names[i]);
+      }
         // select the demographic info panel
         var mdPanel = d3.select('div.panel-body');
         //store first set of metadata separately
@@ -27,6 +33,8 @@ d3.json(url).then(function(data) {
             mdEntry.attr('valNum', valNum);
             valNum +=1;
         } 
+        let mdZero = d3.selectAll("p[valNum='0']");
+        console.log(mdZero);
         // pull initial sample values into separate variable
         initSample = samples[0];
         console.log(initSample);
@@ -82,15 +90,30 @@ d3.json(url).then(function(data) {
         Plotly.newPlot('bar', barData);
     }
     
-    var select = d3.select("select");
-    for (var i = 0; i < names.length; ++i) {
-        newOption = select.append("option").text(names[i]);
-        newOption.attr('value', names[i]);
-    }
+    
     
     init();
   });
 
+function optionChanged(newSample) {
+  console.log(newSample);
+
+  // find location of new sample within the object arrays
+  var newIndex;
+  for (var l=0; l<names.length; l++) {
+    if (names[l] == newSample) {
+      newIndex = l;
+    }
+  }
+  console.log(newIndex);
+  console.log(names[newIndex]);
+
+  // pull the data for the new sample
+  var newMetadata = metadata[newIndex];
+  var newSampleData = samples[newIndex];
+
+  // update the metadata panel
+}
 
   
 
