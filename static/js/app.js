@@ -27,11 +27,11 @@ d3.json(url).then(function(data) {
             mdEntry.attr('valNum', valNum);
             valNum +=1;
         } 
-        // pull inital sample values into separate variable
+        // pull initial sample values into separate variable
         initSample = samples[0];
         console.log(initSample);
 
-        // set paramenters for bubble chart
+        // set paramenters for initial bubble chart
         var trace1 = {
             x: initSample.otu_ids,
             y: initSample.sample_values,
@@ -46,7 +46,7 @@ d3.json(url).then(function(data) {
           };
           
           var bubbleData = [trace1];
-          // define layout for chart
+          // define layout for bubble chart
           var bubbleLayout = { 
             xaxis: {title: {text: 'OTU ID'}},
             showlegend: false,
@@ -55,6 +55,31 @@ d3.json(url).then(function(data) {
           };
           // push bubble chart to designated div tag
           Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+
+        // generate axis labels for bar plot
+        var initSampleOIDS = initSample.otu_ids;
+        var initSampleAxisLabels =[];
+
+        for (var k=0; k<initSampleOIDS.length; k++) {
+          initSampleAxisLabels.push(`OTU ${initSampleOIDS[k]}`);
+        }
+        console.log(initSampleAxisLabels);
+        // set parameters for inital bar chart
+        var barData = [{
+          type: 'bar',
+          y: initSampleAxisLabels.slice(0,10),
+          x: initSample.sample_values.slice(0,10),
+          text: initSample.otu_labels.slice(0,10),
+          orientation: 'h',
+          transforms: [{
+            type: 'sort',
+            target: 'x',
+            order: 'ascending'
+          
+          }]
+        }];
+        
+        Plotly.newPlot('bar', barData);
     }
     
     var select = d3.select("select");
