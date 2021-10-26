@@ -1,10 +1,13 @@
+// directly reference json location on gh pages so that d3 wont freak out about local files
 const url = "https://kellnergp.github.io/interactive-web-visualizations-challenge/samples.json"
 
+// establish variables for storing data later
 var dataset;
 var metadata;
 var names;
 var samples;
 
+// make d3 call to JSON file then run inital setup in a subsequent function to avoid errors due to asynchronous functions
 d3.json(url).then(function(data) {
     dataset = data;
     metadata = data.metadata;
@@ -22,69 +25,24 @@ d3.json(url).then(function(data) {
           newOption.attr('value', names[i]);
       }
 
-        // store initial metadata set separately
-        var initMetadata = metadata[0];
+      // since dropdown options start with the first object in the dataset, set initial values on page to match
 
-        // run metadataPanelGen function
-        metadataPanelGen(initMetadata);
+      // store initial metadata set separately
+      var initMetadata = metadata[0];
 
-        // pull initial sample values into separate variable
-        initSample = samples[0];
-        console.log(initSample);
+      // run metadataPanelGen function with initial data
+      metadataPanelGen(initMetadata);
 
-        // set paramenters for initial bubble chart
-        var trace1 = {
-            x: initSample.otu_ids,
-            y: initSample.sample_values,
-            text: initSample.otu_labels,
-            mode: 'markers',
-            marker: {
-              color: initSample.otu_ids,  
-              size: initSample.sample_values,
-              sizeref: 1.5,
-              sizemode: 'diameter'
-            }
-          };
-          
-          var bubbleData = [trace1];
-          // define layout for bubble chart
-          var bubbleLayout = { 
-            xaxis: {title: {text: 'OTU ID'}},
-            showlegend: false,
-            height: 500,
-            width: 1000
-          };
-          // push bubble chart to designated div tag
-          Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+      // pull initial sample values into separate variable
+      initSampleData = samples[0];
+      console.log(initSampleData);
 
-        // generate axis labels for bar plot
-        var initSampleOIDS = initSample.otu_ids;
-        var initSampleAxisLabels =[];
-
-        for (var k=0; k<initSampleOIDS.length; k++) {
-          initSampleAxisLabels.push(`OTU ${initSampleOIDS[k]}`);
-        }
-        console.log(initSampleAxisLabels);
-        // set parameters for inital bar chart
-        var barData = [{
-          type: 'bar',
-          y: initSampleAxisLabels.slice(0,10),
-          x: initSample.sample_values.slice(0,10),
-          text: initSample.otu_labels.slice(0,10),
-          orientation: 'h',
-          transforms: [{
-            type: 'sort',
-            target: 'x',
-            order: 'ascending'
-          
-          }]
-        }];
-        
-        Plotly.newPlot('bar', barData);
+      // run chartGen function with initial data
+      chartGen(initSampleData);
+      
     }
     
-    
-    
+    // run init function to generate initial page setup
     init();
   });
 
@@ -106,61 +64,12 @@ function optionChanged(newSample) {
   var newSampleData = samples[newIndex];
 
   console.log("Hey!", newSampleData);
-  // run metadataPanelGen function
+  // run metadataPanelGen function with new data
   metadataPanelGen(newMetadata);
 
-  // set new parameters for bubble chart
-  var trace1 = {
-    x: newSampleData.otu_ids,
-    y: newSampleData.sample_values,
-    text: newSampleData.otu_labels,
-    mode: 'markers',
-    marker: {
-      color: newSampleData.otu_ids,  
-      size: newSampleData.sample_values,
-      sizeref: 1.5,
-      sizemode: 'diameter'
-    }
-  };
+  // run chartGen function with new data
+  chartGen(newSampleData);
 
-  var bubbleData = [trace1];
-  
-  // define layout for bubble chart
-  var bubbleLayout = { 
-    xaxis: {title: {text: 'OTU ID'}},
-    showlegend: false,
-    height: 500,
-    width: 1000
-  };
-  
-  // restyle bubble chart with new values
-  Plotly.newPlot("bubble", bubbleData, bubbleLayout);
-
-  // set parameters for new bar chart
-  // generate axis labels for bar plot
-  var newSampleOIDS = newSampleData.otu_ids;
-  var newSampleAxisLabels =[];
-
-  for (var k=0; k<newSampleOIDS.length; k++) {
-    newSampleAxisLabels.push(`OTU ${newSampleOIDS[k]}`);
-  }
-  console.log(newSampleAxisLabels);
-  // set parameters for inital bar chart
-  var barData = [{
-    type: 'bar',
-    y: newSampleAxisLabels.slice(0,10),
-    x: newSampleData.sample_values.slice(0,10),
-    text: newSampleData.otu_labels.slice(0,10),
-    orientation: 'h',
-    transforms: [{
-      type: 'sort',
-      target: 'x',
-      order: 'ascending'
-    
-    }]
-  }];
-  
-  Plotly.newPlot('bar', barData);
 }
 // define metadata panel generation function
 function metadataPanelGen(metadata) {
@@ -178,6 +87,58 @@ function metadataPanelGen(metadata) {
   }
 }
   
+function chartGen(sampleData) {
+  // generate axis labels for bar plot
+  var sampleOIDS = sampleData.otu_ids;
+  var sampleAxisLabels =[];
 
+  for (var k=0; k<sampleOIDS.length; k++) {
+    sampleAxisLabels.push(`OTU ${sampleOIDS[k]}`);
+  }
+  console.log(sampleAxisLabels);
+  // set parameters for bar chart
+  var barData = [{
+    type: 'bar',
+    y: sampleAxisLabels.slice(0,10),
+    x: sampleData.sample_values.slice(0,10),
+    text: sampleData.otu_labels.slice(0,10),
+    orientation: 'h',
+    transforms: [{
+      type: 'sort',
+      target: 'x',
+      order: 'ascending'
+    
+    }]
+  }];
+  // generate plot at proper location
+  Plotly.newPlot('bar', barData);
+
+  // set parameters for bubble chart
+  var trace1 = {
+    x: sampleData.otu_ids,
+    y: sampleData.sample_values,
+    text: sampleData.otu_labels,
+    mode: 'markers',
+    marker: {
+      color: sampleData.otu_ids,  
+      size: sampleData.sample_values,
+      sizeref: 1.5,
+      sizemode: 'diameter'
+    }
+  };
+
+  var bubbleData = [trace1];
+  
+  // define layout for bubble chart
+  var bubbleLayout = { 
+    xaxis: {title: {text: 'OTU ID'}},
+    showlegend: false,
+    height: 500,
+    width: 1000
+  };
+  
+  // generate bubble chart at proper location
+  Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+}
 
 
