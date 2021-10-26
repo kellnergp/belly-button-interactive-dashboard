@@ -153,6 +153,32 @@ function optionChanged(newSample) {
   
   // restyle bubble chart with new values
   Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+
+  // set parameters for new bar chart
+  // generate axis labels for bar plot
+  var newSampleOIDS = newSampleData.otu_ids;
+  var newSampleAxisLabels =[];
+
+  for (var k=0; k<newSampleOIDS.length; k++) {
+    newSampleAxisLabels.push(`OTU ${newSampleOIDS[k]}`);
+  }
+  console.log(newSampleAxisLabels);
+  // set parameters for inital bar chart
+  var barData = [{
+    type: 'bar',
+    y: newSampleAxisLabels.slice(0,10),
+    x: newSampleData.sample_values.slice(0,10),
+    text: newSampleData.otu_labels.slice(0,10),
+    orientation: 'h',
+    transforms: [{
+      type: 'sort',
+      target: 'x',
+      order: 'ascending'
+    
+    }]
+  }];
+  
+  Plotly.newPlot('bar', barData);
 }
 
   
