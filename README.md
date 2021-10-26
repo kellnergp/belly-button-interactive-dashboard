@@ -14,6 +14,12 @@ The JSON file contains three array objects: 'names', consisting of a list of all
 
 HTML raw link: https://github.com/kellnergp/interactive-web-visualizations-challenge/blob/main/index.html
 
+In the \<head> section, give the page an appropriate title and link to the Bootstrap stylesheet.
+
+In the \<body> section, use Bootstrap containers to designate locations on the page for: a dropdown menu of sample options, a panel for displaying sample metadata, a Plotly horizontal bar chart, and a Plotly bubble chart.
+
+At the end of the \<body> section include script tags with links to d3, Plotly, and the page's Javascript file, 'app.js'.
+
 ## Javascript app.js
 
 Javascript raw link: https://github.com/kellnergp/interactive-web-visualizations-challenge/blob/main/static/js/app.js
@@ -21,3 +27,12 @@ Javascript raw link: https://github.com/kellnergp/interactive-web-visualizations
 The JS script starts by establishing the url for the 'samples.json' file mounted on Github Pages.
 
 This url is used throughout development to avoid issues of d3.json() not allowing direct use of local JSON files in the current build of d3.  
+
+Establish variables for the whole 'dataset', the array of 'metadata' objects, the array of 'names' objects, and the array of 'samples' objects.
+
+Use a d3.json() function to read in the JSON file from the 'url' variable.
+
+Using a .then(function(data) function, generate a series of operations to run only after the asynchronous d3 function has finished loading the data.
+
+Within the .then(), first store the 'data' into the 'dataset' variable and the 'data.metadata', 'data.names', and 'data. 
+
