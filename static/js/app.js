@@ -21,20 +21,13 @@ d3.json(url).then(function(data) {
           newOption = select.append("option").text(names[i]);
           newOption.attr('value', names[i]);
       }
-        // select the demographic info panel
-        var mdPanel = d3.select('div.panel-body');
-        //store first set of metadata separately
-        var mdValues = metadata[0];
-        // create counter for panel entries
-        let valNum = 0;
-        // iterate through metadata object and append paragraph tags with each k:v pair displayed
-        for (let [key, value] of Object.entries(mdValues)) {
-            mdEntry = mdPanel.append("p").text(`${key}: ${value}`);
-            mdEntry.attr('valNum', valNum);
-            valNum +=1;
-        } 
-        let mdZero = d3.selectAll("p[valNum='0']");
-        console.log(mdZero);
+
+        // store initial metadata set separately
+        var initMetadata = metadata[0];
+
+        // run metadataPanelGen function
+        metadataPanelGen(initMetadata);
+
         // pull initial sample values into separate variable
         initSample = samples[0];
         console.log(initSample);
@@ -113,19 +106,8 @@ function optionChanged(newSample) {
   var newSampleData = samples[newIndex];
 
   console.log("Hey!", newSampleData);
-
-  // update the metadata panel
-  let counter = 0;
-  // remove previous metadata entries
-  d3.selectAll("p").remove();
-  // select the metadata panel
-  var mdPanel = d3.select('div.panel-body');
-  // add new metadata entries in a loop 
-  for (let [key, value] of Object.entries(newMetadata)) {
-    mdEntry = mdPanel.append("p").text(`${key}: ${value}`);
-    mdEntry.attr('valNum', counter);
-    counter +=1;
-  }
+  // run metadataPanelGen function
+  metadataPanelGen(newMetadata);
 
   // set new parameters for bubble chart
   var trace1 = {
@@ -180,7 +162,21 @@ function optionChanged(newSample) {
   
   Plotly.newPlot('bar', barData);
 }
-
+// define metadata panel generation function
+function metadataPanelGen(metadata) {
+  // update the metadata panel
+  let counter = 0;
+  // remove previous metadata entries
+  d3.selectAll("p").remove();
+  // select the metadata panel
+  var mdPanel = d3.select('div.panel-body');
+  // add new metadata entries in a loop 
+  for (let [key, value] of Object.entries(metadata)) {
+    mdEntry = mdPanel.append("p").text(`${key}: ${value}`);
+    mdEntry.attr('valNum', counter);
+    counter +=1;
+  }
+}
   
 
 
