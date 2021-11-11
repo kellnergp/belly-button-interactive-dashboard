@@ -1,5 +1,5 @@
 // directly reference json location on gh pages so that d3 wont freak out about local files
-const url = "https://kellnergp.github.io/interactive-web-visualizations-challenge/samples.json"
+const url = "https://raw.githubusercontent.com/kellnergp/belly-button-interactive-dashboard/main/samples.json"
 
 // establish variables for storing data later
 var dataset;
