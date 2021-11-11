@@ -28,7 +28,7 @@ Constructing an interactive dashboard to display information from the Belly Butt
 
 JSON raw link: https://github.com/kellnergp/belly-button-interactive-dashboard/blob/main/samples.json
 
-The JSON file contains three array objects: `'names'`, consisting of a list of all relevant sample IDs, `'metadata'`, containing an array of key-value pairs for each sample containing background information of every person sampled in the dataset, and `'samples'`, which contains a list of arrays for every sample with the corresponding ID, the `otu_ids` of every bacteria observed, `otu_labels` with the designations of each observed bacteria, and `the sample_values` of each bacteria in the sample.
+The JSON file contains three array objects: `'names'`, consisting of a list of all relevant sample IDs, `'metadata'`, containing an array of key-value pairs for each sample containing background information of every person sampled in the dataset, and `'samples'`, which contains a list of arrays for every sample with the corresponding ID, the `otu_ids` of every bacteria observed, `otu_labels` with the designations of each observed bacteria, and the `sample_values` of each bacteria in the sample.
 
 ## HTML Template index.html
 
