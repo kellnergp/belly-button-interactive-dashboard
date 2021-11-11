@@ -39,6 +39,9 @@ d3.json(url).then(function(data) {
 
       // run chartGen function with initial data
       chartGen(initSampleData);
+
+      // run gaugeGen function with initial data
+      gaugeGen(initMetadata);
       
     }
     
@@ -69,6 +72,9 @@ function optionChanged(newSample) {
 
   // run chartGen function with new data
   chartGen(newSampleData);
+
+  // run gaugeGen function with new data
+  gaugeGen(newMetadata);
 
 }
 // define metadata panel generation function
