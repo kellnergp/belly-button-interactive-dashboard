@@ -128,4 +128,7 @@ When the loop finds a 'names' value matching the 'newSample' input it saves the 
 
 It then saves the metadata and sample for that index as 'newMetaData' and 'newSampleData' respectively.
 
+## Contact
+
+Galen Kellner: kellnergp@gmail.com
 The function then calls metadataPanelGen(newMetadata) and chartGen(newSampleData) to update the dashboard.
