@@ -10,7 +10,21 @@ function gaugeGen(metadataValues) {
             value: wFreq,
             title: { text: "Scrubs Per Week" },
             type: "indicator",
-            mode: "gauge+number"
+            mode: "gauge+number",
+            gauge: {
+                axis:{range: [null, 9], tickwidth: 1},
+                steps: [
+                    {range: [0,1]},
+                    {range: [1,2]},
+                    {range: [2,3]},
+                    {range: [3,4]},
+                    {range: [4,5]},
+                    {range: [5,6]},
+                    {range: [6,7]},
+                    {range: [7,8]},
+                    {range: [8,9]}
+                ]
+            }
         }
     ];
 
