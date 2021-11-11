@@ -1,4 +1,24 @@
-# interactive-web-visualizations-challenge
+# belly-button-interactive-dashboard
+
+## Overview
+
+The Belly Button Biodiversity Dataset explores the prevalence of various bacteria present in the belly buttons of a broad sample of Americans.
+
+This project accesses the data and renders several metrics on an interactive dashboard, primarily utilizing the Plotly Javascript library.
+
+## Tools Used
+
+HTML
+
+Javascript
+
+d3js
+
+Plotly-js
+
+Bootstrap
+
+## Coding Walkthrough
 
 Dashboard Link: https://kellnergp.github.io/interactive-web-visualizations-challenge/
 
