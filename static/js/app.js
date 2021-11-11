@@ -116,8 +116,11 @@ function chartGen(sampleData) {
     
     }]
   }];
+
+  // set layout for bar chart
+  var barLayout = {title: "Top 10 OTUs"};
   // generate plot at proper location
-  Plotly.newPlot('bar', barData);
+  Plotly.newPlot('bar', barData, barLayout);
 
   // set parameters for bubble chart
   var trace1 = {
@@ -136,7 +139,8 @@ function chartGen(sampleData) {
   var bubbleData = [trace1];
   
   // define layout for bubble chart
-  var bubbleLayout = { 
+  var bubbleLayout = {
+    title: "OTU Counts", 
     xaxis: {title: {text: 'OTU ID'}},
     showlegend: false,
     height: 500,
