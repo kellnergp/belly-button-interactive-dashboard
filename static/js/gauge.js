@@ -13,16 +13,18 @@ function gaugeGen(metadataValues) {
             mode: "gauge+number",
             gauge: {
                 axis:{range: [null, 9], tickwidth: 1},
+                bgcolor: "white",
+                bar: { color: "grey" },
                 steps: [
-                    {range: [0,1]},
-                    {range: [1,2]},
-                    {range: [2,3]},
-                    {range: [3,4]},
-                    {range: [4,5]},
-                    {range: [5,6]},
-                    {range: [6,7]},
-                    {range: [7,8]},
-                    {range: [8,9]}
+                    {range: [0,1], color: "black"},
+                    {range: [1,2], color: "red"},
+                    {range: [2,3], color: "orange"},
+                    {range: [3,4], color: "yellow"},
+                    {range: [4,5], color: "green"}, 
+                    {range: [5,6], color: "blue"},
+                    {range: [6,7], color: "indigo"},
+                    {range: [7,8], color: "violet"},
+                    {range: [8,9], color: "white"}
                 ]
             }
         }
