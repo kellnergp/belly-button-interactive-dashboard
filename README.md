@@ -6,6 +6,8 @@ The Belly Button Biodiversity Dataset explores the prevalence of various bacteri
 
 This project accesses the data and renders several metrics on an interactive dashboard, primarily utilizing the Plotly Javascript library.
 
+![DashboardPreview](bellyButtonDash.png)
+
 ## Tools Used
 
 HTML
