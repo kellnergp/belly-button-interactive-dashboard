@@ -22,6 +22,9 @@ Bootstrap
 
 # Coding Walkthrough
 
+<details>
+  <summary>Click to expand!</summary>
+
 Dashboard Link: https://kellnergp.github.io/belly-button-interactive-dashboard/
 
 Constructing an interactive dashboard to display information from the Belly Button Biodiversity dataset involves three major components; an HTML template page governing the arrangement of charts and information, a pair of Javascript files detailing how to access data and design charts and other information displays, and a JSON file containing all of the data.
@@ -143,6 +146,8 @@ When the loop finds a `names` value matching the `newSample` input it saves the 
 It then saves the metadata and sample for that index as `newMetaData` and `newSampleData` respectively.
 
 The function then calls `metadataPanelGen(newMetadata)`, `gaugeGen(newMetadata)`, and `chartGen(newSampleData)` to update the dashboard.
+  
+  </details>
 
 ## Contact
 
